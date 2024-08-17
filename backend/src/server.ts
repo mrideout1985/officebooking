@@ -5,15 +5,14 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerSpec from './configs/swaggerConfig';
 import prisma from './configs/prisma';
 import userRoutes from './routes/users';
+import cookieParser from "cookie-parser"
 
 dotenv.config();
-
 const app = express();
-
+app.use(cookieParser());
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/users', userRoutes);
 
